@@ -3,10 +3,11 @@
 import { BaseNode } from './BaseNode';
 import { NODE_COLORS } from '../styles';
 
-export const LLMNode = ({ id, data }) => (
+export const LLMNode = ({ id, data, selected }) => (
   <BaseNode
     id={id}
     data={data}
+    selected={selected}
     title="LLM"
     color={NODE_COLORS.llm}
     inputs={[

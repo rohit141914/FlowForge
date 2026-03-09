@@ -7,6 +7,8 @@ export const PipelineToolbar = () => (
   <div className="toolbar">
     <div className="toolbar-logo">VectorShift</div>
     <div className="toolbar-divider" />
+    <span className="toolbar-drag-hint">✦ Drag nodes onto the canvas</span>
+    <div className="toolbar-divider" />
     <div className="toolbar-palette">
       <span className="toolbar-palette-label">Nodes</span>
       <DraggableNode type='customInput'  label='Input'       color={NODE_COLORS.customInput}  />

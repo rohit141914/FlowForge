@@ -3,10 +3,11 @@
 import { BaseNode } from './BaseNode';
 import { NODE_COLORS } from '../styles';
 
-export const OutputNode = ({ id, data }) => (
+export const OutputNode = ({ id, data, selected }) => (
   <BaseNode
     id={id}
     data={{ outputName: data?.outputName || id.replace('customOutput-', 'output_'), outputType: data?.outputType || 'Text', ...data }}
+    selected={selected}
     title="Output"
     color={NODE_COLORS.customOutput}
     inputs={[{ id: 'value', label: 'value' }]}

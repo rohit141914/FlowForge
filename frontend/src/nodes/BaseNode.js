@@ -4,24 +4,10 @@ import { Handle, Position } from 'reactflow';
 import { useStore } from '../store';
 import './nodes.css';
 
-/**
- * BaseNode — generic node card.
- *
- * Props:
- *  id        – ReactFlow node id
- *  data      – ReactFlow node data (initial field values)
- *  title     – display name shown in header
- *  color     – hex accent color for the header strip
- *  inputs    – array of { id, label? } — rendered as target handles on the left
- *  outputs   – array of { id, label? } — rendered as source handles on the right
- *  fields    – array of field descriptors:
- *                { key, label, type: 'text'|'select'|'textarea', options?, placeholder?, rows? }
- *  children  – optional custom body content rendered below fields
- *  style     – extra inline styles merged onto the card (for dynamic overrides)
- */
 export const BaseNode = ({
   id,
   data,
+  selected = false,
   title,
   color = '#4f8ef7',
   inputs = [],
@@ -31,12 +17,10 @@ export const BaseNode = ({
   style = {},
 }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
+  const deleteNode      = useStore((state) => state.deleteNode);
 
-  const handleChange = (key, value) => {
-    updateNodeField(id, key, value);
-  };
+  const handleChange = (key, value) => updateNodeField(id, key, value);
 
-  // top % must stay inline — computed from handle count
   const inputTop = (index) => {
     if (inputs.length === 1) return '50%';
     const step = 100 / (inputs.length + 1);
@@ -50,7 +34,7 @@ export const BaseNode = ({
   };
 
   return (
-    <div className="node-card" style={style}>
+    <div className={`node-card${selected ? ' node-card--selected' : ''}`} style={style}>
       {/* Input handles */}
       {inputs.map((handle, i) => (
         <div
@@ -95,9 +79,16 @@ export const BaseNode = ({
         </div>
       ))}
 
-      {/* Header — background is dynamic per node color */}
+      {/* Header */}
       <div className="node-header" style={{ background: color }}>
-        <span>{title}</span>
+        <span className="node-header-title">{title}</span>
+        <button
+          className="node-delete-btn"
+          onClick={() => deleteNode(id)}
+          title="Delete node"
+        >
+          ✕
+        </button>
       </div>
 
       {/* Body */}

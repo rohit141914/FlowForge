@@ -6,26 +6,24 @@ import { useStore } from '../store';
 import { NODE_COLORS } from '../styles';
 import './nodes.css';
 
-// Extract unique valid JS variable names from {{varName}} patterns
 const extractVariables = (text) => {
   const matches = [...text.matchAll(/\{\{\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*\}\}/g)];
   return [...new Set(matches.map((m) => m[1]))];
 };
 
-// Calculate the longest line width (in characters) for horizontal sizing
 const longestLineLength = (text) => {
   const lines = text.split('\n');
   return Math.max(...lines.map((l) => l.length), 0);
 };
 
-export const TextNode = ({ id, data }) => {
+export const TextNode = ({ id, data, selected }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
   const textareaRef = useRef(null);
   const updateNodeField = useStore((state) => state.updateNodeField);
+  const deleteNode      = useStore((state) => state.deleteNode);
 
   const variables = useMemo(() => extractVariables(currText), [currText]);
 
-  // Auto-resize textarea height as content grows
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
@@ -39,10 +37,8 @@ export const TextNode = ({ id, data }) => {
     updateNodeField(id, 'text', val);
   };
 
-  // Dynamic width — must stay inline
   const nodeWidth = Math.max(220, longestLineLength(currText) * 8 + 48);
 
-  // Evenly space variable handles — top must stay inline (computed)
   const handleTop = (index) => {
     if (variables.length === 1) return '50%';
     const step = 100 / (variables.length + 1);
@@ -50,8 +46,8 @@ export const TextNode = ({ id, data }) => {
   };
 
   return (
-    <div className="node-card" style={{ width: nodeWidth }}>
-      {/* Dynamic variable input handles */}
+    <div className={`node-card${selected ? ' node-card--selected' : ''}`} style={{ width: nodeWidth }}>
+      {/* Variable input handles */}
       {variables.map((varName, i) => (
         <div
           key={varName}
@@ -65,13 +61,10 @@ export const TextNode = ({ id, data }) => {
             className="node-handle-dot"
             style={{ background: NODE_COLORS.text }}
           />
-          <span className="node-handle-label node-handle-label--left">
-            {varName}
-          </span>
+          <span className="node-handle-label node-handle-label--left">{varName}</span>
         </div>
       ))}
 
-      {/* Output handle */}
       <Handle
         type="source"
         position={Position.Right}
@@ -80,12 +73,17 @@ export const TextNode = ({ id, data }) => {
         style={{ background: NODE_COLORS.text, top: '50%' }}
       />
 
-      {/* Header */}
       <div className="node-header" style={{ background: NODE_COLORS.text }}>
-        <span>Text</span>
+        <span className="node-header-title">Text</span>
+        <button
+          className="node-delete-btn"
+          onClick={() => deleteNode(id)}
+          title="Delete node"
+        >
+          ✕
+        </button>
       </div>
 
-      {/* Body */}
       <div className="node-body">
         <div className="node-field">
           <label className="node-field-label">Text</label>
