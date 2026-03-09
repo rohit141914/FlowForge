@@ -11,11 +11,6 @@ const extractVariables = (text) => {
   return [...new Set(matches.map((m) => m[1]))];
 };
 
-const longestLineLength = (text) => {
-  const lines = text.split('\n');
-  return Math.max(...lines.map((l) => l.length), 0);
-};
-
 export const TextNode = ({ id, data, selected }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
   const textareaRef = useRef(null);
@@ -37,8 +32,6 @@ export const TextNode = ({ id, data, selected }) => {
     updateNodeField(id, 'text', val);
   };
 
-  const nodeWidth = Math.max(220, longestLineLength(currText) * 8 + 48);
-
   const handleTop = (index) => {
     if (variables.length === 1) return '50%';
     const step = 100 / (variables.length + 1);
@@ -46,7 +39,7 @@ export const TextNode = ({ id, data, selected }) => {
   };
 
   return (
-    <div className={`node-card${selected ? ' node-card--selected' : ''}`} style={{ width: nodeWidth }}>
+    <div className={`node-card${selected ? ' node-card--selected' : ''}`} style={{ width: 320 }}>
       {/* Variable input handles */}
       {variables.map((varName, i) => (
         <div
