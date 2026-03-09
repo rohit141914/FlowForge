@@ -17,3 +17,5 @@ export const parsePipeline = async (nodes, edges) => {
   const { data } = await apiClient.post('/pipelines/parse', { nodes, edges });
   return data;
 };
+
+export const pingBackend = () => apiClient.get('/');
