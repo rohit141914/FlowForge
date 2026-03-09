@@ -1,0 +1,255 @@
+/* app.css — styles for App, Toolbar, DraggableNode, SubmitButton, Modal */
+
+/* ── App layout ───────────────────────────────────────────────────────────── */
+.app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #0f1117;
+  overflow: hidden;
+}
+
+/* ── Toolbar ──────────────────────────────────────────────────────────────── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 16px;
+  background: #1a2235;
+  border-bottom: 1px solid #2d3a4f;
+  flex-shrink: 0;
+}
+
+.toolbar-logo {
+  font-weight: 700;
+  font-size: 16px;
+  color: #e2e8f0;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 32px;
+  background: #2d3a4f;
+  flex-shrink: 0;
+}
+
+.toolbar-palette {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbar-palette-label {
+  font-size: 11px;
+  color: #8899aa;
+  margin-right: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Draggable node chip ──────────────────────────────────────────────────── */
+.draggable-node {
+  cursor: grab;
+  min-width: 80px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 0 10px;
+  transition: background-color 0.15s, border-color 0.15s;
+  user-select: none;
+  /* border and background-color are set inline — depend on color prop */
+}
+
+.draggable-node:active {
+  cursor: grabbing;
+}
+
+.draggable-node-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  /* color is set inline — depends on color prop */
+}
+
+/* ── Submit bar ───────────────────────────────────────────────────────────── */
+.submit-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: #1a2235;
+  border-top: 1px solid #2d3a4f;
+  flex-shrink: 0;
+}
+
+.submit-btn {
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 32px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  cursor: pointer;
+  /* background and box-shadow set inline — change when loading */
+}
+
+.submit-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.submit-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ── Modal overlay ────────────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-card {
+  background: #1a2235;
+  border: 1px solid #2d3a4f;
+  border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  padding: 32px;
+  min-width: 340px;
+  font-family: Inter, system-ui, sans-serif;
+  color: #e2e8f0;
+}
+
+.modal-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.modal-title-row--error {
+  margin-bottom: 16px;
+}
+
+.modal-icon {
+  font-size: 22px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.modal-title--error {
+  color: #ef4444;
+}
+
+.modal-error-msg {
+  margin: 0 0 24px;
+  font-size: 13px;
+  color: #8899aa;
+  line-height: 1.6;
+}
+
+.modal-error-hint {
+  margin: 0 0 24px;
+  font-size: 12px;
+  color: #4f6080;
+  font-family: monospace;
+  line-height: 1.6;
+}
+
+.modal-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.modal-dag-row {
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  /* background and border set inline — depend on is_dag */
+}
+
+.modal-dag-label {
+  font-size: 12px;
+  color: #8899aa;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.modal-dag-value {
+  font-size: 15px;
+  font-weight: 700;
+  /* color set inline — depend on is_dag */
+}
+
+.modal-cycle-warning {
+  margin: 0 0 20px;
+  font-size: 12px;
+  color: #8899aa;
+  line-height: 1.6;
+}
+
+.modal-close-btn {
+  width: 100%;
+  background: #2d3a4f;
+  border: none;
+  border-radius: 8px;
+  color: #e2e8f0;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.modal-close-btn:hover {
+  background: #3d4f6b;
+}
+
+/* ── Stat card ────────────────────────────────────────────────────────────── */
+.stat-card {
+  border-radius: 10px;
+  padding: 14px 18px;
+  /* background and border set inline — depend on color prop */
+}
+
+.stat-card-label {
+  font-size: 11px;
+  color: #8899aa;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.stat-card-value {
+  font-size: 28px;
+  font-weight: 700;
+  /* color set inline — depends on color prop */
+}

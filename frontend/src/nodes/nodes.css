@@ -1,0 +1,146 @@
+/* nodes.css — styles for all pipeline node components */
+
+/* ── Card ─────────────────────────────────────────── */
+.node-card {
+  background: #1a2235;
+  border: 1px solid #2d3a4f;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  min-width: 220px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 13px;
+  color: #e2e8f0;
+  overflow: visible;
+  position: relative;
+}
+
+/* ── Header ───────────────────────────────────────── */
+.node-header {
+  padding: 8px 12px;
+  border-radius: 10px 10px 0 0;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  /* background is set inline per node color */
+}
+
+/* ── Body ─────────────────────────────────────────── */
+.node-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Field row ────────────────────────────────────── */
+.node-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.node-field-label {
+  font-size: 11px;
+  color: #8899aa;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Inputs / Selects / Textareas ─────────────────── */
+.node-input,
+.node-select,
+.node-textarea {
+  background: #0f1117;
+  border: 1px solid #2d3a4f;
+  border-radius: 6px;
+  color: #e2e8f0;
+  padding: 5px 8px;
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.node-select {
+  cursor: pointer;
+}
+
+.node-textarea {
+  resize: none;
+  overflow: hidden;
+  min-height: 64px;
+  line-height: 1.5;
+  font-family: monospace;
+}
+
+/* ── Handle wrappers ──────────────────────────────── */
+.node-handle-wrapper {
+  position: absolute;
+  transform: translateY(-50%);
+  /* top is set inline (computed) */
+}
+
+.node-handle-wrapper--left {
+  left: 0;
+}
+
+.node-handle-wrapper--right {
+  right: 0;
+}
+
+/* ── Handle dots ──────────────────────────────────── */
+.node-handle-dot {
+  width: 10px !important;
+  height: 10px !important;
+  border: 2px solid #0f1117 !important;
+  /* background is set inline per node color */
+}
+
+/* ── Handle labels ────────────────────────────────── */
+.node-handle-label {
+  position: absolute;
+  font-size: 10px;
+  color: #8899aa;
+  white-space: nowrap;
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+  /* opaque background + elevated z-index so edge lines don't bleed through */
+  background: #1a2235;
+  padding: 1px 4px;
+  border-radius: 3px;
+  z-index: 10;
+}
+
+.node-handle-label--left {
+  right: 100%;
+  margin-right: 4px;
+  text-align: right;
+}
+
+.node-handle-label--right {
+  left: 100%;
+  margin-left: 4px;
+}
+
+/* ── Text node — variable badges ──────────────────── */
+.text-node-vars-row {
+  font-size: 11px;
+  color: #8899aa;
+}
+
+.text-node-var-badge {
+  display: inline-block;
+  background: #1e293b;
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-right: 4px;
+  font-family: monospace;
+}
