@@ -60,6 +60,10 @@ body {
 .react-flow__controls-button svg {
   fill: #e2e8f0;
 }
+.react-flow__controls-button svg path {
+  fill: black !important;
+  color: #e2e8f0 !important;
+}
 
 .react-flow__minimap {
   background: #1a2235;
