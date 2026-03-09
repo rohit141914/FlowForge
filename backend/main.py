@@ -7,7 +7,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000","https://flow-forge-beige.vercel.app/"],
+    allow_origins=["http://localhost:3000", "https://flow-forge-beige.vercel.app"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
